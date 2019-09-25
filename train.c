@@ -14,6 +14,39 @@ struct train_info{
     struct block_info* dest;
 };
 
+void print_block(struct block_info blocks[]){
+    char bi[9]; // block_info
+    char si[9]; // signal_info
+    
+    int i;
+    struct block_info* block;
+    
+    for (i = 0; i < 9; i++){
+        block = &blocks[i];
+        if (block->train == NULL){
+            bi[i] = '\0';
+        }else{
+            bi[i] = '0' + block->train->number;
+        }
+    }
+    
+    for (i = 0; i < 9; i++){
+        block = &blocks[i];
+        if (block->signal == RED){
+            si[i] = 'R';
+        }else{
+            si[i] = 'G';
+        }
+    }
+    
+    printf("                                    %c\n", bi[5]);
+    printf("                              %c ┌ ─ ─ ─ ┤\n", si[5]);
+    printf("  %c %c                       %c   │ %c %c\n", si[0], bi[0], bi[4], si[6], bi[6]);
+    printf("├ ─ ─ ─ ┐             %c ┌ ─ ─ ─ ┼ ─ ─ ─ ┤\n", si[4]);
+    printf("  %c %c   │ %c %c     %c %c   │ %c %c     %c %c\n", si[1], bi[1], si[2], bi[2], si[3], bi[3], si[7], bi[7], si[8], bi[8]);
+    printf("├ ─ ─ ─ ┴ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┤\n");
+}
+
 void set_signals(struct block_info blocks[], int nblocks){
     int i;
     struct block_info* block;
@@ -25,6 +58,8 @@ void set_signals(struct block_info blocks[], int nblocks){
             block->signal = RED;
         }
     }
+    
+    print_block(blocks);
 }
 
 int find_block(struct block_info* block, struct block_info* dest){
@@ -70,23 +105,6 @@ void proceed(struct block_info blocks[], int nblocks){
             }
         }
     }
-    
-    char bi[9];
-    
-    for (i = 0; i < 9; i++){
-        block = &blocks[i];
-        if (block->train == NULL){
-            bi[i] = '\0';
-        }else{
-            bi[i] = '0' + block->train->number;
-        }
-    }
-    printf("                                    %c\n", bi[5]);
-    printf("                                ┌ ─ ─ ─ ┤\n");
-    printf("    %c                       %c   │   %c\n", bi[0], bi[4], bi[6]);
-    printf("├ ─ ─ ─ ┐               ┌ ─ ─ ─ ┼ ─ ─ ─ ┤\n");
-    printf("    %c   │   %c       %c   │   %c   │   %c\n", bi[1], bi[2], bi[3], bi[7], bi[8]);
-    printf("├ ─ ─ ─ ┴ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┤\n");
 }
 
 int main(void){
@@ -158,6 +176,7 @@ int main(void){
     int nblocks = 9;
     
     int i;
+    print_block(blocks);
     for (i = 0; i < 4; i++){
         proceed(blocks, nblocks);
         set_signals(blocks, nblocks);

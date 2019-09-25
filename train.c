@@ -174,9 +174,10 @@ int main(void){
     trains[4].dest = &blocks[8];
     
     int nblocks = 9;
+    print_block(blocks);
     
     int i;
-    print_block(blocks);
+    set_signals(blocks, nblocks);
     for (i = 0; i < 4; i++){
         proceed(blocks, nblocks);
         set_signals(blocks, nblocks);

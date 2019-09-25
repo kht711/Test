@@ -44,7 +44,7 @@ void print_block(struct block_info blocks[]){
     printf("  %c %c                       %c   │ %c %c\n", si[0], bi[0], bi[4], si[6], bi[6]);
     printf("├ ─ ─ ─ ┐             %c ┌ ─ ─ ─ ┼ ─ ─ ─ ┤\n", si[4]);
     printf("  %c %c   │ %c %c     %c %c   │ %c %c     %c %c\n", si[1], bi[1], si[2], bi[2], si[3], bi[3], si[7], bi[7], si[8], bi[8]);
-    printf("├ ─ ─ ─ ┴ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┤\n");
+    printf("├ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┼ ─ ─ ─ ┤\n");
 }
 
 void set_signals(struct block_info blocks[], int nblocks){

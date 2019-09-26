@@ -3,7 +3,7 @@
 //2048->360 deg, 1024->180 deg
 const int steps = 2048;
 
-//밀리초 기준 (UL은 unsigned int형의 숫자라는 선언.)
+//밀리초 기준 (UL은 unsigned long형의 숫자라는 선언.)
 unsigned long times = (2 * 3600 * 1000UL);
 
 /* IN1->pin8

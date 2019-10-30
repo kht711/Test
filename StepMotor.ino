@@ -26,7 +26,7 @@ uint8_t data[] = { 0x00, 0x00, 0x00, 0x00 };
 //타이머 변수. 시, 분, 초 관리.
 int hour;
 int minute;
-int second = 0;
+int second;
 
 //설정하고 싶은 시간 설정 (2시간 설정)
 #define HOUR 2

@@ -26,19 +26,18 @@ uint8_t data[] = { 0x00, 0x00, 0x00, 0x00 };
 //타이머 변수. 시, 분, 초 관리.
 int hour;
 int minute;
-int second;
+int second = 0;
 
 //설정하고 싶은 시간 설정 (2시간 설정)
 #define HOUR 2
 #define MINUTE 0
-#define SECOND 0
 
 TM1637Display display(CLK, DIO);
 
 void TimerInit(){
   hour = HOUR;
   minute = MINUTE;
-  second = SECOND;
+  second = 0;
   data[0] = display.encodeDigit(hour / 10);
   data[1] = 0x80 + display.encodeDigit(hour % 10);
   data[2] = display.encodeDigit(minute / 10);

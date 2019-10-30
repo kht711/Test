@@ -29,8 +29,8 @@ int minute;
 int second;
 
 //설정하고 싶은 시간 설정 (2시간 설정)
-#define HOUR 0
-#define MINUTE 1
+#define HOUR 2
+#define MINUTE 0
 #define SECOND 0
 
 TM1637Display display(CLK, DIO);
@@ -43,7 +43,7 @@ void TimerInit(){
   data[1] = 0x80 + display.encodeDigit(hour % 10);
   data[2] = display.encodeDigit(minute / 10);
   data[3] = display.encodeDigit(minute % 10);
-  display.setBrightness(0x0f);
+  display.setBrightness(0x07);
   display.setSegments(data);
   s = millis();
 }
@@ -55,9 +55,10 @@ void TimerDisplay(){
   //무한 반복
   while(1){
     //hour가 0, 그리고 minute가 0이 되는 조건이면
-    //타이머 끄면서 함수 빠져나오기
+    //타이머 화면 꺼지면서 함수 빠져나오기
     if (hour == 0 && minute == 0){
-      display.setBrightness(0x00);
+      display.setBrightness(0x07, false);
+      display.setSegments(data);
       return;
     }
     

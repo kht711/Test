@@ -52,7 +52,7 @@ void TimerInit(){
 void TimerDisplay(){
   //디스플레이 초기화
   TimerInit();
-  
+
   //무한 반복
   while(1){
     //hour가 0, 그리고 minute가 0이 되는 조건이면
@@ -63,8 +63,9 @@ void TimerDisplay(){
       return;
     }
     
-    //콜론 ON, OFF
-    if (millis() - s > 500){
+    //콜론 ON, OFF (실제 시간 오차 수정)
+    if (millis() - s > 480){
+      delay(18);
       s = millis();
       //콜론 없애기
       if (dotFlag == 0){

@@ -26,18 +26,19 @@ uint8_t data[] = { 0x00, 0x00, 0x00, 0x00 };
 //타이머 변수. 시, 분, 초 관리.
 int hour;
 int minute;
-int second = 0;
+int second;
 
-//설정하고 싶은 시간 설정 (2시간 설정)
+//설정하고 싶은 시간 설정
 #define HOUR 2
 #define MINUTE 0
+#define SECOND 14
 
 TM1637Display display(CLK, DIO);
 
 void TimerInit(){
   hour = HOUR;
   minute = MINUTE;
-  second = 0;
+  second = SECOND;
   data[0] = display.encodeDigit(hour / 10);
   data[1] = 0x80 + display.encodeDigit(hour % 10);
   data[2] = display.encodeDigit(minute / 10);
@@ -53,6 +54,9 @@ void TimerDisplay(){
   //디스플레이 초기화
   TimerInit();
 
+  //코드 경과 시간 측정 시작
+  unsigned int start = millis();
+  
   //무한 반복
   while(1){
     //hour가 0, 그리고 minute가 0이 되는 조건이면
@@ -63,9 +67,8 @@ void TimerDisplay(){
       return;
     }
     
-    //콜론 ON, OFF (실제 시간 오차 수정)
-    if (millis() - s > 480){
-      delay(18);
+    //콜론 ON, OFF
+    if (millis() - s > 500){
       s = millis();
       //콜론 없애기
       if (dotFlag == 0){
@@ -76,14 +79,14 @@ void TimerDisplay(){
       else{
         dotFlag = 0;
         data[1] = 0x80 + display.encodeDigit(hour % 10);
-        second++;
+        second--;
       }
     }
     
-    //60초 경과
-    if (second == 60){
+    // 초가 0이하가 되었을 때
+    if (second < 0){
       s = millis();
-      second = 0;
+      second = 59;
       if (minute == 0){
         minute = 59;
         hour--;
@@ -94,6 +97,9 @@ void TimerDisplay(){
       data[1] = 0x80 + display.encodeDigit(hour % 10);
       data[2] = display.encodeDigit(minute / 10);
       data[3] = display.encodeDigit(minute % 10);
+
+      //코드 경촤 측정 종료 (Ctrl + Shift + M으로 확인 가능)
+      Serial.println(millis() - start);
     }
     display.setSegments(data);
   }
@@ -105,6 +111,7 @@ void setup() {
   delay(15000UL);
   //step() 함수를 실행할 때 스피드 설정
   myStepper.setSpeed(15);  //15 RPM
+  Serial.begin(9600);
 }
 
 void loop() {

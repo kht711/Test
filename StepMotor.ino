@@ -117,7 +117,7 @@ void TimerDisplay(){
 //-------------------------------------------------
 
 void setup() {
-  delay(3000UL);
+  delay(15000UL);
   //step() 함수를 실행할 때 스피드 설정
   myStepper.setSpeed(15);  //15 RPM
   Serial.begin(9600);

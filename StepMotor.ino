@@ -37,6 +37,10 @@ TM1637Display display(CLK, DIO);
 
 //-------------------------------------------------
 
+/*
+SDA -> A4
+SCL -> A5
+*/
 DS3231M_Class DS3231M;
 
 //-------------------------------------------------
@@ -80,6 +84,7 @@ void TimerDisplay(){
       data[1] = display.encodeDigit(hour % 10);
     }
 
+    //1초 되었을 때
     if (secs != now.second()){
       secs = now.second();
       Serial.println(String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()));
@@ -122,14 +127,14 @@ void setup() {
 
 void loop() {
   // 반시계방향
-  //myStepper.step(steps * 9);
-  //myStepper.step(steps * 8);
+  myStepper.step(steps * 9);
+  myStepper.step(steps * 8);
 
   TimerDisplay();
 
   // 시계방향
-  //myStepper.step(-steps * 9);
-  //myStepper.step(-steps * 8);
+  myStepper.step(-steps * 9);
+  myStepper.step(-steps * 8);
   
   TimerDisplay();
 }

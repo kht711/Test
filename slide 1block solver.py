@@ -17,19 +17,35 @@ sol = [
     [-1, -1, -1, 0]
     ]
 
+
 dt_now = datetime.datetime.now()
 print(dt_now.strftime('%H:%M:%S, START!'))
+
+f = open("result.txt", 'w')
+f.write(dt_now.strftime('%H:%M:%S, START!\n'))
+f.close()
+
 depth = []
 
 debug = False
 seek = 0
 seekLimit = 50
 
-def printPuzzle(puzzle):
+def printPuzzle(puzzle, file=False):
     for i in range(len(puzzle)):
         for j in range(len(puzzle[0])):
             print(puzzle[i][j], end=" ")
         print("")
+
+    if file:
+        f = open("result.txt", 'a')
+        for i in range(len(puzzle)):
+            for j in range(len(puzzle[0])):
+                f.write(str(puzzle[i][j]))
+                f.write(" ")
+            f.write("\n")
+        f.write("\n")
+        f.close()
     return
 
 def seekTile(seek, moved):
@@ -77,9 +93,16 @@ def seekTile(seek, moved):
 
                         if temp == sol:
                             print("find!")
+                            f = open("result.txt", 'a')
+                            f.write("find!\n")
+                            f.close()
                             for d in depth:
                                 printPuzzle(d)
                                 print("")
+                                
+                            for d in depth:
+                                printPuzzle(d, True)
+                                
                             sys.exit(1)
 
                         ##############################
@@ -91,9 +114,9 @@ def seekTile(seek, moved):
                                 for col in range(0, 4):
                                     if endTile[row][col] == sol[row][col]:
                                         rate += 1
-                            if rate > 6:
-                                print(dt_now.strftime('%H:%M:%S'), end=" ")
-                                print("Correctly:", rate)
+                            #if rate > 6:
+                            #    print(dt_now.strftime('%H:%M:%S'), end=" ")
+                            #    print("Correctly:", rate)
                             
                             seek -= 1
                             puzzle[i-1][j] = puzzle[i][j]
@@ -155,9 +178,16 @@ def seekTile(seek, moved):
 
                         if temp == sol:
                             print("find!")
+                            f = open("result.txt", 'a')
+                            f.write("find!\n")
+                            f.close()
                             for d in depth:
                                 printPuzzle(d)
                                 print("")
+                                
+                            for d in depth:
+                                printPuzzle(d, True)
+                                
                             sys.exit(1)
 
                         ############################
@@ -169,9 +199,9 @@ def seekTile(seek, moved):
                                 for col in range(0, 4):
                                     if endTile[row][col] == sol[row][col]:
                                         rate += 1
-                            if rate > 6:
-                                print(dt_now.strftime('%H:%M:%S'), end=" ")
-                                print("Correctly:", rate)
+                            #if rate > 6:
+                            #    print(dt_now.strftime('%H:%M:%S'), end=" ")
+                            #    print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i][j-1] = puzzle[i][j]
@@ -234,9 +264,16 @@ def seekTile(seek, moved):
 
                         if temp == sol:
                             print("find!")
+                            f = open("result.txt", 'a')
+                            f.write("find!\n")
+                            f.close()
                             for d in depth:
                                 printPuzzle(d)
                                 print("")
+                                
+                            for d in depth:
+                                printPuzzle(d, True)
+                                
                             sys.exit(1)
 
                         ##############################
@@ -248,9 +285,9 @@ def seekTile(seek, moved):
                                 for col in range(0, 4):
                                     if endTile[row][col] == sol[row][col]:
                                         rate += 1
-                            if rate > 6:
-                                print(dt_now.strftime('%H:%M:%S'), end=" ")
-                                print("Correctly:", rate)
+                            #if rate > 6:
+                            #    print(dt_now.strftime('%H:%M:%S'), end=" ")
+                            #    print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i+1][j] = puzzle[i][j]
@@ -313,9 +350,16 @@ def seekTile(seek, moved):
 
                         if temp == sol:
                             print("find!")
+                            f = open("result.txt", 'a')
+                            f.write("find!\n")
+                            f.close()
                             for d in depth:
                                 printPuzzle(d)
                                 print("")
+                                
+                            for d in depth:
+                                printPuzzle(d, True)
+                                
                             sys.exit(1)
 
                         ###############################
@@ -327,9 +371,9 @@ def seekTile(seek, moved):
                                 for col in range(0, 4):
                                     if endTile[row][col] == sol[row][col]:
                                         rate += 1
-                            if rate > 6:
-                                print(dt_now.strftime('%H:%M:%S'), end=" ")
-                                print("Correctly:", rate)
+                            #if rate > 6:
+                            #    print(dt_now.strftime('%H:%M:%S'), end=" ")
+                            #    print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i][j+1] = puzzle[i][j]

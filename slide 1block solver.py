@@ -1,4 +1,5 @@
 import sys
+import datetime
 
 puzzle = [
     [0, -1, -1, -1],
@@ -16,7 +17,8 @@ sol = [
     [-1, -1, -1, 0]
     ]
 
-
+dt_now = datetime.datetime.now()
+print(dt_now.strftime('%H:%M:%S, START!'))
 depth = []
 
 debug = False
@@ -82,11 +84,16 @@ def seekTile(seek, moved):
 
                         ##############################
                         if seek >= seekLimit:
-                            if debug:
-                                print("seekLimit!", len(depth))
-                                for d in depth:
-                                    printPuzzle(d)
-                                    #input()
+                            dt_now = datetime.datetime.now()
+                            endTile = depth[-1]
+                            rate = 0
+                            for row in range(1, 4):
+                                for col in range(0, 4):
+                                    if endTile[row][col] == sol[row][col]:
+                                        rate += 1
+                            if rate > 6:
+                                print(dt_now.strftime('%H:%M:%S'), end=" ")
+                                print("Correctly:", rate)
                             
                             seek -= 1
                             puzzle[i-1][j] = puzzle[i][j]
@@ -155,11 +162,16 @@ def seekTile(seek, moved):
 
                         ############################
                         if seek >= seekLimit:
-                            if debug:
-                                print("seekLimit!", len(depth))
-                                for d in depth:
-                                    printPuzzle(d)
-                                    #input()
+                            dt_now = datetime.datetime.now()
+                            endTile = depth[-1]
+                            rate = 0
+                            for row in range(1, 4):
+                                for col in range(0, 4):
+                                    if endTile[row][col] == sol[row][col]:
+                                        rate += 1
+                            if rate > 6:
+                                print(dt_now.strftime('%H:%M:%S'), end=" ")
+                                print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i][j-1] = puzzle[i][j]
@@ -229,11 +241,16 @@ def seekTile(seek, moved):
 
                         ##############################
                         if seek >= seekLimit:
-                            if debug:
-                                print("seekLimit!", len(depth))
-                                for d in depth:
-                                    printPuzzle(d)
-                                    #input()
+                            dt_now = datetime.datetime.now()
+                            endTile = depth[-1]
+                            rate = 0
+                            for row in range(1, 4):
+                                for col in range(0, 4):
+                                    if endTile[row][col] == sol[row][col]:
+                                        rate += 1
+                            if rate > 6:
+                                print(dt_now.strftime('%H:%M:%S'), end=" ")
+                                print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i+1][j] = puzzle[i][j]
@@ -303,11 +320,16 @@ def seekTile(seek, moved):
 
                         ###############################
                         if seek >= seekLimit:
-                            if debug:
-                                print("seekLimit!", len(depth))
-                                for d in depth:
-                                    printPuzzle(d)
-                                    #input()
+                            dt_now = datetime.datetime.now()
+                            endTile = depth[-1]
+                            rate = 0
+                            for row in range(1, 4):
+                                for col in range(0, 4):
+                                    if endTile[row][col] == sol[row][col]:
+                                        rate += 1
+                            if rate > 6:
+                                print(dt_now.strftime('%H:%M:%S'), end=" ")
+                                print("Correctly:", rate)
                                 
                             seek -= 1
                             puzzle[i][j+1] = puzzle[i][j]

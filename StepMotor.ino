@@ -135,7 +135,8 @@ void TimerDisplay(){
 void setup() {
   delay(15000UL);
   //step() 함수를 실행할 때 스피드 설정
-  myStepper.setSpeed(15);  //15 RPM
+  myStepper1.setSpeed(15);  //15 RPM
+  myStepper2.setSpeed(15);
   Serial.begin(9600);
   DS3231M.begin();
   DS3231M.adjust(DateTime(F(__DATE__), F(__TIME__)));

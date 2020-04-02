@@ -144,10 +144,10 @@ void setup() {
 
 void loop() {
   // 반시계방향
-  Step(15);
+  Step(17);
   TimerDisplay();
 
   // 시계방향
-  Step(-15);
+  Step(-17);
   TimerDisplay();
 }

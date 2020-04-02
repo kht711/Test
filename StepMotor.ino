@@ -11,8 +11,24 @@ const int steps = 2048;
  * IN3->pin10
  * IN4->pin11
  */
-Stepper myStepper(steps, 11, 9, 10, 8);
+Stepper myStepper1(steps, 11, 9, 10, 8);
+Stepper myStepper2(steps, 7, 5, 6, 4);
 
+void Step(int count){
+  int i, j;
+  int s = 1;
+  int c = count;
+  if (c < 0){
+    s = -1;
+    c = -count;
+  }
+  for (i = 0; i < c; i++){
+    for (j = 0; j < steps; j++){
+      myStepper1.step(s);
+      myStepper2.step(s);
+    }
+  }
+}
 //-------------------------------------------------
 
 //TM1637 모듈에 있는 핀 CLK, DIO를 디지털 핀 3, 2로 설정
@@ -127,14 +143,10 @@ void setup() {
 
 void loop() {
   // 반시계방향
-  myStepper.step(steps * 9);
-  myStepper.step(steps * 8);
-
+  Step(15);
   TimerDisplay();
 
   // 시계방향
-  myStepper.step(-steps * 9);
-  myStepper.step(-steps * 8);
-  
+  Step(-15);
   TimerDisplay();
 }

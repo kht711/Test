@@ -1,31 +1,27 @@
-#include <Stepper.h>
+#include <AccelStepper.h>
 #include <Arduino.h>
 #include <TM1637Display.h>
 #include <DS3231M.h>
 
-//2048->360 deg, 1024->180 deg
-const int steps = 2048;
+//4096->360 deg
+const long steps = 4096;
 
 /* IN1->pin8
  * IN2->pin9
  * IN3->pin10
  * IN4->pin11
  */
-Stepper myStepper1(steps, 11, 9, 10, 8);
-Stepper myStepper2(steps, 7, 5, 6, 4);
+AccelStepper myStepper1(AccelStepper::HALF4WIRE, 8, 10, 9, 11);
+AccelStepper myStepper2(AccelStepper::HALF4WIRE, 4, 6, 5, 7);
 
-void Step(int count){
-  int i, j;
-  int s = 1;
-  int c = count;
-  if (c < 0){
-    s = -1;
-    c = -count;
-  }
-  for (i = 0; i < c; i++){
-    for (j = 0; j < steps; j++){
-      myStepper1.step(s);
-      myStepper2.step(s);
+void Step(long count){
+  myStepper1.moveTo(steps * count);
+  myStepper2.moveTo(steps * count);
+  while (1){
+    myStepper1.run();
+    myStepper2.run();
+    if (myStepper1.distanceToGo() == 0 || myStepper2.distanceToGo() == 0){
+      break;
     }
   }
 }
@@ -134,9 +130,17 @@ void TimerDisplay(){
 
 void setup() {
   delay(15000UL);
-  //step() 함수를 실행할 때 스피드 설정
-  myStepper1.setSpeed(15);  //15 RPM
-  myStepper2.setSpeed(15);
+  //스피드, 가속도 설정(필수)
+  myStepper1.setMaxSpeed(1000.0);
+  myStepper1.setAcceleration(500.0);
+  myStepper1.setSpeed(200);
+  myStepper2.setMaxSpeed(1000.0);
+  myStepper2.setAcceleration(500.0);
+  myStepper2.setSpeed(200);
+  //초기위치 설정
+  myStepper1.setCurrentPosition(0);
+  myStepper2.setCurrentPosition(0);
+  
   Serial.begin(9600);
   DS3231M.begin();
   DS3231M.adjust(DateTime(F(__DATE__), F(__TIME__)));

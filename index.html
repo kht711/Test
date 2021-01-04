@@ -1,15 +1,16 @@
 <html>
     <head>
         <script>
-            var bgm = new Audio();
-            function play(){
-                bgm.src = "Example.ogg";
-                bgm.loop = true;
-                bgm.play();
+            function stop(){
+                var iframe = document.getElementById("iframe");
+                var audio = iframe.contentWindow.document.getElementById("audio");
+                audio.stop();
+                audio.currentTime = 0;
             }
         </script>
     </head>
     <body>
-        <input type="button" value = "play2!" onclick="play()">
+        <input type="button" value="stop" onclick="stop()">
+        <iframe src="./Example.mp3" allow="autoplay" id="audio" style="display:none" id="iframe"></iframe>
     </body>
 </html>

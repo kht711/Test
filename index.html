@@ -1,7 +1,15 @@
 <html>
     <head>
+        <script>
+            function play(){
+                var bgm = new Audio();
+                bgm.src = "Example.ogg";
+                bgm.loop = true;
+                bgm.play();
+            }
+        </script>
     </head>
     <body>
-        <h1>test</h1>
+        <input type="button" value = "play!" onclick="play()">
     </body>
 </html>

@@ -7,10 +7,16 @@
                 audio.stop();
                 audio.currentTime = 0;
             }
+            function play(){
+                var iframe = document.getElementById("iframe");
+                var audio = iframe.contentWindow.document.getElementById("audio");
+                audio.play();
+            }
         </script>
     </head>
     <body>
         <input type="button" value="stop" onclick="stop()">
+        <input type="button" value="play" onclick="play()">
         <iframe src="./Example.ogg" allow="autoplay" id="audio" style="display:none" id="iframe"></iframe>
     </body>
 </html>

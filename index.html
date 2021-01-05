@@ -15,7 +15,7 @@
             }
 
             function se(){
-                var audio = document.getElementById("se");
+                var audio = new Audio();
                 audio.src = "./audio/Example.ogg";
                 audio.play();
             }
@@ -24,8 +24,7 @@
     <body>
         <input type="button" value="play" onclick="play()">
         <input type="button" value="stop" onclick="stop()">
-        <input type="button" value="SE play" onclick="se()">
+        <input type="button" value="SE play2" onclick="se()">
         <audio id="audio"></audio>
-        <audio id="se"></audio>
     </body>
 </html>

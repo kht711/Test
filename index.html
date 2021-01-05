@@ -5,12 +5,13 @@
             function init(){
                 var iframe = document.getElementById("iframeBgm");
                 var audio = iframe.contentWindow.document.getElementById("audio");
+                audio.loop = true;
                 audio.play();
             }
         </script>
     </head>
     <body>
-        <input type="button" value="play" onclick="init()">
+        <input type="button" value="play2" onclick="init()">
         <iframe src="./bgm.html" loop style="display:none" id="iframeBgm"></iframe>
     </body>
 </html>

@@ -4,14 +4,14 @@
         <script>
             function init(){
                 var audio = document.getElementById("audio");
-                audio.src = location.href.substr(0, location.href.lastIndexOf("/")) + "/audio/Example.ogg";
+                audio.src = "./audio/sample_00.ogg";
                 audio.loop = true;
                 audio.play();
             }
         </script>
     </head>
     <body>
-        <input type="button" value="play5.2" onclick="init()">
+        <input type="button" value="play5.3" onclick="init()">
         <audio id="audio" controls></audio>
     </body>
 </html>

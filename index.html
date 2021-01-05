@@ -3,14 +3,15 @@
     <head>
         <script>
             function init(){
-                var iframe = document.getElementById("iframeBgm");
-                var audio = iframe.contentWindow.document.getElementById("audio");
+                var audio = document.getElementById("audio");
+                audio.src = "./Example.ogg";
+                audio.loop = true;
                 audio.play();
             }
         </script>
     </head>
     <body>
         <input type="button" value="play5.2" onclick="init()">
-        <iframe src="./bgm.html" id="iframeBgm"></iframe>
+        <audio id="audio" controls></audio>
     </body>
 </html>

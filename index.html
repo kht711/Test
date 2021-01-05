@@ -2,15 +2,14 @@
 <html>
     <head>
         <script>
+            var audio = new Audio();
             function play(){
-                var audio = document.getElementById("audio");
                 audio.src = "./audio/sample_00.ogg";
                 audio.loop = true;
                 audio.play();
             }
 
             function stop(){
-                var audio = document.getElementById("audio");
                 audio.pause();
             }
 
@@ -25,6 +24,5 @@
         <input type="button" value="play" onclick="play()">
         <input type="button" value="stop" onclick="stop()">
         <input type="button" value="SE play2" onclick="se()">
-        <audio id="audio"></audio>
     </body>
 </html>

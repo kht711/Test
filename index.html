@@ -4,7 +4,7 @@
         <script>
             function init(){
                 var audio = document.getElementById("audio");
-                audio.src = location.origin + "/audio/Example.ogg";
+                audio.src = location.href.substr(0, location.href.lastIndexOf("/")) + "/audio/Example.ogg";
                 audio.loop = true;
                 audio.play();
             }

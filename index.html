@@ -5,6 +5,7 @@
             function init(){
                 var iframe = document.getElementById("iframeBgm");
                 var audio = iframe.contentWindow.document.getElementById("audio");
+                audio.src = "./Example.ogg";
                 audio.loop = true;
                 audio.play();
             }
@@ -12,6 +13,6 @@
     </head>
     <body>
         <input type="button" value="play4" onclick="init()">
-        <iframe src="./bgm.html" allow="autoplay" style="display:none" id="iframeBgm"></iframe>
+        <iframe src="./bgm.html" allow="autoplay" id="iframeBgm"></iframe>
     </body>
 </html>
